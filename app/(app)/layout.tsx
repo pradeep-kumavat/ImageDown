@@ -11,12 +11,14 @@ import {
   Share2Icon,
   UploadIcon,
   ImageIcon,
+  Loader
 } from "lucide-react";
 
 const sidebarItems = [
   { href: "/home", icon: LayoutDashboardIcon, label: "Home" },
   { href: "/social-share", icon: Share2Icon, label: "Social Share" },
   { href: "/video-upload", icon: UploadIcon, label: " Upload Video" },
+  { href: "/caption-generator", icon: Loader, label: "Caption generator" },
 ];
 
 export default function AppLayout({
