@@ -1,14 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { NextRequest, NextResponse } from "next/server";
 
-
-import { NextApiRequest, NextApiResponse } from 'next';
-
-export async function POST(req: NextApiRequest, res: NextApiResponse){
+export async function POST(req: NextRequest, res: NextResponse){
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
-  const { text } = await req.body;
+  const reqBody = await req.json()
+        const {text} = reqBody
 
   if (!text) {
-    return res.status(400).json({
+    return NextResponse.json({
       success: false,
       message: 'No text provided by the user',
     });
@@ -27,7 +26,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
 
     console.log(result.response.text());
 
-    return Response.json({
+    return NextResponse.json({
       success:true,
       message: result.response.text()
     },
@@ -37,7 +36,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse){
 
   } catch (error) {
       console.log("Error in generating response")
-      return Response.json({
+      return NextResponse.json({
         success:false,
         message:"Error in generating response"
       },
