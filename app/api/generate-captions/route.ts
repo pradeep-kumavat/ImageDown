@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse){
+export async function POST(req: NextRequest){
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY ?? "");
   const reqBody = await req.json()
         const {text} = reqBody
@@ -36,6 +36,7 @@ export async function POST(req: NextRequest, res: NextResponse){
 
   } catch (error) {
       console.log("Error in generating response")
+      console.log(error)
       return NextResponse.json({
         success:false,
         message:"Error in generating response"
